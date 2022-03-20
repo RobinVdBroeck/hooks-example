@@ -1,0 +1,29 @@
+{
+  "name": "hooks-example",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint src/**/*.jsx",
+    "lint:fix": "eslint --fix src/**/*.jsx",
+    "format": "prettier . --write"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-error-boundary": "^3.1.4",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^1.2.0",
+    "eslint": "^8.11.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.29.4",
+    "prettier": "^2.6.0",
+    "vite": "^2.8.6"
+  }
+}
