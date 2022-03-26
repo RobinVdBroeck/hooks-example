@@ -12,6 +12,7 @@ specifiers:
   react: ^17.0.2
   react-dom: ^17.0.2
   react-error-boundary: ^3.1.4
+  simpledotcss: ^2.0.6
   uuid: ^8.3.2
   vite: ^2.8.6
 
@@ -20,6 +21,7 @@ dependencies:
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-error-boundary: 3.1.4_react@17.0.2
+  simpledotcss: 2.0.6
   uuid: 8.3.2
 
 devDependencies:
@@ -1736,6 +1738,10 @@ packages:
       get-intrinsic: 1.1.1
       object-inspect: 1.12.0
     dev: true
+
+  /simpledotcss/2.0.6:
+    resolution: {integrity: sha512-pOizQQ7/8zGhglrI8xtD91NZxIDJcP7jHQ7kMMGRCrkTWJBRHU6exOq0fZ/4/EWKBIIQ1r6uCBSeKYLFWJ3eCg==}
+    dev: false
 
   /source-map-js/1.0.2:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}
