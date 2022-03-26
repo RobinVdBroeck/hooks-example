@@ -1,7 +1,15 @@
 import React from "react";
 import { v4 as uuid } from "uuid";
+import * as PropTypes from "prop-types";
+import en from "./translations/en.json";
+import nl from "./translations/nl.json";
 
 class App extends React.Component {
+  static languages = {
+    en,
+    nl,
+  };
+
   constructor(props) {
     super(props);
 
@@ -10,23 +18,70 @@ class App extends React.Component {
       newTodo: {
         id: uuid(),
         text: "",
+        completed: false,
       },
+      selectedLanguage: "en",
     };
-
-    this.onChange = this.onChange.bind(this);
-    this.addTodo = this.addTodo.bind(this);
   }
 
   render() {
     return (
       <>
-        <h2>Todo list:</h2>
+        <h1>
+          <LanguageText
+            languages={App.languages}
+            selectedLanguage={this.state.selectedLanguage}
+            translationKey="todo-app"
+          />
+        </h1>
+        <h2>
+          <LanguageText
+            languages={App.languages}
+            selectedLanguage={this.state.selectedLanguage}
+            translationKey="language-selection"
+          />
+        </h2>
+        <div>
+          <button onClick={this.setLanguage("en")}>
+            <LanguageText
+              languages={App.languages}
+              selectedLanguage={this.state.selectedLanguage}
+              translationKey="english"
+            />
+          </button>
+          <button onClick={this.setLanguage("nl")}>
+            <LanguageText
+              languages={App.languages}
+              selectedLanguage={this.state.selectedLanguage}
+              translationKey="dutch"
+            />
+          </button>
+        </div>
+        <h2>
+          <LanguageText
+            languages={App.languages}
+            selectedLanguage={this.state.selectedLanguage}
+            translationKey="todo-list"
+          />
+        </h2>
         <ul>
           {this.state.todos.map((todo) => (
-            <TodoItem key={todo.id} todo={todo} />
+            <TodoItem
+              key={todo.id}
+              text={todo.text}
+              selectedLanguage={this.state.selectedLanguage}
+              languages={App.languages}
+              completed={todo.completed}
+              onCompleteChange={this.onCompleteChange(todo)}
+            />
           ))}
           {this.state.newTodo.text !== "" && (
-            <TodoItem todo={this.state.newTodo} />
+            <TodoItem
+              text={this.state.newTodo.text}
+              selectedLanguage={this.state.selectedLanguage}
+              languages={App.languages}
+              draft
+            />
           )}
         </ul>
         <input
@@ -35,20 +90,29 @@ class App extends React.Component {
           onChange={this.onChange}
         />
         <button type="button" onClick={this.addTodo}>
-          Add
+          <LanguageText
+            languages={App.languages}
+            selectedLanguage="en"
+            translationKey="add"
+          />
         </button>
-        <div>
-          <h3>Stats</h3>
-          <p>
-            <bold># todos:</bold>
-            {this.state.todos.length}
-          </p>
-        </div>
+        <Stats
+          todos={this.state.todos}
+          languages={App.languages}
+          selectedLanguage={this.state.selectedLanguage}
+        />
       </>
     );
   }
 
-  onChange($e) {
+  setLanguage = (lang) => () => {
+    this.setState((state) => ({
+      ...state,
+      selectedLanguage: lang,
+    }));
+  };
+
+  onChange = ($e) => {
     this.setState((state) => ({
       ...state,
       newTodo: {
@@ -56,9 +120,9 @@ class App extends React.Component {
         text: $e.target.value,
       },
     }));
-  }
+  };
 
-  addTodo() {
+  addTodo = () => {
     if (this.state.newTodo.text.trim() === "") {
       return;
     }
@@ -77,13 +141,151 @@ class App extends React.Component {
         text: "",
       },
     }));
+  };
+
+  onCompleteChange = (item) => {
+    return (completed) => {
+      this.setState((state) => {
+        let todos = [...state.todos];
+        const idx = todos.findIndex((todo) => todo === item);
+        if (idx == -1) {
+          throw new Error();
+        }
+        todos[idx] = { ...todos[idx], completed };
+        return {
+          ...state,
+          todos,
+        };
+      });
+    };
+  };
+}
+
+class Stats extends React.Component {
+  static propTypes = {
+    languages: PropTypes.shape({ en: PropTypes.object, nl: PropTypes.object })
+      .isRequired,
+    selectedLanguage: PropTypes.string.isRequired,
+    todos: PropTypes.array.isRequired,
+  };
+
+  render() {
+    const { languages, selectedLanguage, todos } = this.props;
+    const [completed, notCompleted] = todos.reduce(
+      ([completed, notCompleted], todo) => {
+        if (todo.completed) {
+          return [completed + 1, notCompleted];
+        }
+        return [completed, notCompleted + 1];
+      },
+      [0, 0]
+    );
+
+    return (
+      <div>
+        <h3>Stats</h3>
+        <p>
+          <strong>
+            #{" "}
+            <LanguageText
+              languages={languages}
+              selectedLanguage={selectedLanguage}
+              translationKey="todos"
+            />{" "}
+            :
+          </strong>
+          <span>{todos.length}</span>
+        </p>
+        <p>
+          <strong>
+            #{" "}
+            <LanguageText
+              languages={languages}
+              selectedLanguage={selectedLanguage}
+              translationKey="completed"
+            />
+            :{" "}
+          </strong>
+          <span>{completed}</span>
+        </p>
+        <p>
+          <strong>
+            #{" "}
+            <LanguageText
+              languages={languages}
+              selectedLanguage={selectedLanguage}
+              translationKey="uncompleted"
+            />
+            :{" "}
+          </strong>
+          <span>{notCompleted}</span>
+        </p>
+      </div>
+    );
   }
 }
 
 class TodoItem extends React.Component {
+  static propTypes = {
+    languages: PropTypes.shape({ en: PropTypes.object, nl: PropTypes.object })
+      .isRequired,
+    selectedLanguage: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    completed: PropTypes.bool.isRequired,
+    draft: PropTypes.bool,
+  };
+  static defaultProps = {
+    draft: false,
+  };
+
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
   render() {
-    const { todo } = this.props;
-    return <li>{todo.text}</li>;
+    const { text, completed, draft, languages, selectedLanguage } = this.props;
+    return (
+      <li>
+        <span>{text}</span>
+        {!draft && (
+          <button onClick={this.handleClick}>
+            {!draft && (
+              <LanguageText
+                languages={languages}
+                selectedLanguage={selectedLanguage}
+                translationKey={completed ? "uncomplete" : "complete"}
+              />
+            )}
+          </button>
+        )}
+      </li>
+    );
+  }
+
+  handleClick($e) {
+    const { onCompleteChange, completed } = this.props;
+    $e.preventDefault();
+    onCompleteChange(!completed);
+  }
+}
+
+class LanguageText extends React.Component {
+  static propTypes = {
+    languages: PropTypes.shape({ en: PropTypes.object, nl: PropTypes.object })
+      .isRequired,
+    selectedLanguage: PropTypes.string.isRequired,
+    translationKey: PropTypes.string.isRequired,
+  };
+
+  render() {
+    const { languages, selectedLanguage, translationKey } = this.props;
+    return (
+      <span>
+        {languages?.[selectedLanguage]?.[translationKey] ??
+          "not-found:`" + translationKey + "`"}
+      </span>
+    );
   }
 }
 

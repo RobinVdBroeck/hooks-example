@@ -1,0 +1,15 @@
+{
+    "todo-app": "todo app",
+    "language-selection": "language selection",
+    "english": "english",
+    "dutch": "dutch",
+    "add": "add",
+    "todo": "todo",
+    "todos": "todos",
+    "complete": "complete",
+    "uncomplete": "uncomplete",
+    "completed": "completed",
+    "uncompleted": "uncompleted",
+    "new-todo-item": "new todo item",
+    "todo-list": "todo list"
+}
