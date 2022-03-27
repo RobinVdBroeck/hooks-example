@@ -6,10 +6,10 @@ Simple react example to show differences between:
 
 ## How to run
 ```sh
-pnpm install
-pnpm run dev
+npm install
+npm run dev
 ```
-Tested on node 16.14.2, pnpm 6.32.3 and Firefox 98.0.2
+Tested on node 16.14.2, npm 8.5.0 and Firefox 98.0.2
 
 
 ## What this is not meant to be
