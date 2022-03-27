@@ -6,6 +6,7 @@ import LanguageText from "./LanguageText";
 import Stats from "./Stats";
 import TodoItem from "./TodoItem";
 import { LanguageContext, SelectedLanguageContext } from "./contexts";
+import LanguageSelector from "./LanguageSelector";
 
 class App extends React.Component {
   static languages = {
@@ -35,17 +36,9 @@ class App extends React.Component {
             <h1>
               <LanguageText translationKey="todo-app" />
             </h1>
-            <h2>
-              <LanguageText translationKey="language-selection" />
-            </h2>
-            <div>
-              <button onClick={this.setLanguage("en")}>
-                <LanguageText translationKey="english" />
-              </button>
-              <button onClick={this.setLanguage("nl")}>
-                <LanguageText translationKey="dutch" />
-              </button>
-            </div>
+            <LanguageSelector
+              onSelectLanguage={(newVal) => this.setLanguage(newVal)}
+            />
             <h2>
               <LanguageText translationKey="todo-list" />
             </h2>
@@ -77,7 +70,7 @@ class App extends React.Component {
     );
   }
 
-  setLanguage = (lang) => () => {
+  setLanguage = (lang) => {
     this.setState((state) => ({
       ...state,
       selectedLanguage: lang,

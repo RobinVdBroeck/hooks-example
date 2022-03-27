@@ -2,6 +2,7 @@ import React from "react";
 import { v4 as uuid } from "uuid";
 import en from "../translations/en.json";
 import nl from "../translations/nl.json";
+import LanguageSelector from "./LanguageSelector";
 import LanguageText from "./LanguageText";
 import Stats from "./Stats";
 import TodoItem from "./TodoItem";
@@ -36,29 +37,11 @@ class App extends React.Component {
             translationKey="todo-app"
           />
         </h1>
-        <h2>
-          <LanguageText
-            languages={App.languages}
-            selectedLanguage={this.state.selectedLanguage}
-            translationKey="language-selection"
-          />
-        </h2>
-        <div>
-          <button onClick={this.setLanguage("en")}>
-            <LanguageText
-              languages={App.languages}
-              selectedLanguage={this.state.selectedLanguage}
-              translationKey="english"
-            />
-          </button>
-          <button onClick={this.setLanguage("nl")}>
-            <LanguageText
-              languages={App.languages}
-              selectedLanguage={this.state.selectedLanguage}
-              translationKey="dutch"
-            />
-          </button>
-        </div>
+        <LanguageSelector
+          languages={App.languages}
+          selectedLanguage={this.state.selectedLanguage}
+          onSelectLanguage={(newVal) => this.setLanguage(newVal)}
+        />
         <h2>
           <LanguageText
             languages={App.languages}
@@ -80,6 +63,7 @@ class App extends React.Component {
           {this.state.newTodo.text !== "" && (
             <TodoItem
               text={this.state.newTodo.text}
+              completed={this.state.newTodo.completed}
               selectedLanguage={this.state.selectedLanguage}
               languages={App.languages}
               draft
@@ -107,7 +91,7 @@ class App extends React.Component {
     );
   }
 
-  setLanguage = (lang) => () => {
+  setLanguage = (lang) => {
     this.setState((state) => ({
       ...state,
       selectedLanguage: lang,
