@@ -1,6 +1,6 @@
-import React from 'react';
-import * as PropTypes from 'prop-types';
-import LanguageText from './LanguageText';
+import React from "react";
+import * as PropTypes from "prop-types";
+import LanguageText from "./LanguageText";
 
 class TodoItem extends React.Component {
   static propTypes = {

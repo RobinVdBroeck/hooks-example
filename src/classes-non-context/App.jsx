@@ -2,7 +2,7 @@ import React from "react";
 import { v4 as uuid } from "uuid";
 import en from "../translations/en.json";
 import nl from "../translations/nl.json";
-import LanguageText  from "./LanguageText";
+import LanguageText from "./LanguageText";
 import Stats from "./Stats";
 import TodoItem from "./TodoItem";
 

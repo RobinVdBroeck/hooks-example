@@ -1,16 +1,15 @@
 {
-    "todo-app": "tedoen app",
-    "language-selection": "taal keuzes",
-    "english": "Engels",
-    "dutch": "Nederlands",
-    "add": "toevoegen",
-    "todo": "tedoen",
-    "todos": "tedoens",
-    "complete": "maak compleet",
-    "uncomplete": "maak incompleet",
-    "completed": "compleet",
-    "uncompleted": "incompleet",
-    "new-todo-item": "nieuw tedoen item",
-    "todo-list": "tedoen lijst"
+  "todo-app": "tedoen app",
+  "language-selection": "taal keuzes",
+  "english": "Engels",
+  "dutch": "Nederlands",
+  "add": "toevoegen",
+  "todo": "tedoen",
+  "todos": "tedoens",
+  "complete": "maak compleet",
+  "uncomplete": "maak incompleet",
+  "completed": "compleet",
+  "uncompleted": "incompleet",
+  "new-todo-item": "nieuw tedoen item",
+  "todo-list": "tedoen lijst"
 }
-

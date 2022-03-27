@@ -18,6 +18,6 @@ module.exports = {
   extends: ["plugin:react/recommended", "eslint:recommended", "prettier"],
   plugins: ["react", "prettier"],
   rules: {
-    "react/prop-types": 0
-  }  
+    "react/prop-types": 0,
+  },
 };

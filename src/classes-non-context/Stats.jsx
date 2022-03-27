@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 import * as PropTypes from "prop-types";
-import LanguageText from './LanguageText';
+import LanguageText from "./LanguageText";
 
 class Stats extends React.Component {
   static propTypes = {
