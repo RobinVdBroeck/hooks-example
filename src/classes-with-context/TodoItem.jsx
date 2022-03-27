@@ -4,9 +4,6 @@ import LanguageText from "./LanguageText";
 
 class TodoItem extends React.Component {
   static propTypes = {
-    languages: PropTypes.shape({ en: PropTypes.object, nl: PropTypes.object })
-      .isRequired,
-    selectedLanguage: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     completed: PropTypes.bool.isRequired,
     draft: PropTypes.bool,
@@ -21,15 +18,13 @@ class TodoItem extends React.Component {
   }
 
   render() {
-    const { text, completed, draft, languages, selectedLanguage } = this.props;
+    const { text, completed, draft } = this.props;
     return (
       <li>
         <span>{text}</span>
         {!draft && (
           <button onClick={this.handleClick}>
             <LanguageText
-              languages={languages}
-              selectedLanguage={selectedLanguage}
               translationKey={completed ? "uncomplete" : "complete"}
             />
           </button>
