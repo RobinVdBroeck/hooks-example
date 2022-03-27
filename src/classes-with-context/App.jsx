@@ -52,7 +52,11 @@ class App extends React.Component {
                 />
               ))}
               {this.state.newTodo.text !== "" && (
-                <TodoItem text={this.state.newTodo.text} draft />
+                <TodoItem
+                  text={this.state.newTodo.text}
+                  completed={this.state.newTodo.completed}
+                  draft
+                />
               )}
             </ul>
             <input
