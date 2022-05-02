@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from "react";
-import Cnc from "./classes-non-context/App";
-import Cwc from "./classes-with-context/App";
-import Hooks from "./hooks/App";
+import Cnc from "./classes-non-context";
+import Cwc from "./classes-with-context";
+import Hooks from "./hooks";
 
 const App = () => {
   const [implementation, setImplementation] = useState("classes-non-context");
