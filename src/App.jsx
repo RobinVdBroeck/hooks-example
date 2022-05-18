@@ -2,9 +2,10 @@ import React, { useState, useMemo } from "react";
 import Cnc from "./classes-non-context";
 import Cwc from "./classes-with-context";
 import Hooks from "./hooks";
+import Redux from "./redux";
 
 const App = () => {
-  const [implementation, setImplementation] = useState("classes-non-context");
+  const [implementation, setImplementation] = useState("redux");
 
   const app = useMemo(() => {
     switch (implementation) {
@@ -14,6 +15,8 @@ const App = () => {
         return <Cwc />;
       case "hooks":
         return <Hooks />;
+      case "redux":
+        return <Redux />;
       default:
         return <div>Unknown implementation</div>;
     }
@@ -31,6 +34,7 @@ const App = () => {
           Classes with context
         </button>
         <button onClick={() => setImplementation("hooks")}>Hooks</button>
+        <button onClick={() => setImplementation("redux")}>Redux</button>
       </div>
       <div>Current implementation: {implementation}</div>
     </div>
