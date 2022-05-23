@@ -6,14 +6,19 @@ const LanguageSelector = () => {
   const dispatch = useDispatch();
 
   const onButtonClick = (lang) =>
-    useCallback(($e) => {
-      dispatch({
-        type: "languages/selectLanguage",
-        payload: {
-          language: lang,
-        },
-      });
-    });
+    useCallback(
+      ($e) => {
+        $e.preventDefault();
+
+        dispatch({
+          type: "language/selectLanguage",
+          payload: {
+            language: lang,
+          },
+        });
+      },
+      [dispatch]
+    );
 
   return (
     <>
