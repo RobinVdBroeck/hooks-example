@@ -1,9 +1,12 @@
+import React from "react";
+import { Provider } from "react-redux";
 import App from "./App";
-import { Provider } from 'react-redux';
-import  store  from "./store";
+import store from "./store";
 
-export default () => (
-	<Provider store={store}>
-		<App />
-	</Provider>
+const ReduxWrapper = () => (
+  <Provider store={store}>
+    <App />
+  </Provider>
 );
+
+export default ReduxWrapper;

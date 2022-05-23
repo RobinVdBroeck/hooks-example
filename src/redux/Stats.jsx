@@ -1,22 +1,12 @@
-import React, { useMemo } from "react";
-import * as PropTypes from "prop-types";
+import React from "react";
+import { useSelector } from "react-redux";
 import LanguageText from "./LanguageText";
+import { selectFilter } from "./features/todos/selectors";
 
-const Stats = ({ todos }) => {
-  // Only recalculates the completed and not completed if the todos changed
-  const [completed, notCompleted] = useMemo(
-    () =>
-      todos.reduce(
-        ([completed, notCompleted], todo) => {
-          if (todo.completed) {
-            return [completed + 1, notCompleted];
-          }
-          return [completed, notCompleted + 1];
-        },
-        [0, 0]
-      ),
-    [todos]
-  );
+const Stats = () => {
+  const todos = useSelector(selectFilter("ALL"));
+  const completed = useSelector(selectFilter("COMPLETED"));
+  const notCompleted = useSelector(selectFilter("NOT-COMPLETED"));
 
   return (
     <div>
@@ -31,19 +21,18 @@ const Stats = ({ todos }) => {
         <strong>
           # <LanguageText translationKey="completed" />:{" "}
         </strong>
-        <span>{completed}</span>
+        <span>{completed.length}</span>
       </p>
       <p>
         <strong>
           # <LanguageText translationKey="uncompleted" />:{" "}
         </strong>
-        <span>{notCompleted}</span>
+        <span>{notCompleted.length}</span>
       </p>
     </div>
   );
 };
-Stats.propTypes = {
-  todos: PropTypes.array.isRequired,
-};
+
+Stats.propTypes = {};
 
 export default Stats;

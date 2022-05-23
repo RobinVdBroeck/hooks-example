@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import {useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import LanguageText from "./LanguageText";
 
 const LanguageSelector = () => {
@@ -8,11 +8,11 @@ const LanguageSelector = () => {
   const onButtonClick = (lang) =>
     useCallback(($e) => {
       dispatch({
-        type: "languages/selectLanguage", 
-        payload: { 
-          language: lang
-      }}
-       );
+        type: "languages/selectLanguage",
+        payload: {
+          language: lang,
+        },
+      });
     });
 
   return (
